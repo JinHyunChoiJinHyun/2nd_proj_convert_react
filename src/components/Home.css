@@ -1,0 +1,75 @@
+main{    
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; 
+    margin: 2.5rem auto 0;
+    font-family: "retro";
+}
+
+.leftPanel{
+    flex: 1;
+    max-width: 400px;
+}
+.leftPanel h2{}
+.leftPanel .coinTable{
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;    
+}
+.leftPanel .coinTable .coinItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.leftPanel .coinTable .coinInfo{
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+}
+.leftPanel .coinTable .coinInfo .coinName{}
+.leftPanel .coinTable .coinInfo .coinPrice{}
+.leftPanel .coinTable .coinInfo .coinRate{}
+.leftPanel .coinTable .coinWeather{}
+.leftPanel .coinTable .coinWeather span{
+    font-size: 1.5rem;
+}
+
+.rightPanel{
+    flex: 1;
+    max-width: 600px;
+}
+.rightPanel .marketCapPanel{
+    display: flex;
+    justify-content: space-between;
+}
+.rightPanel .marketCapPanel h2{}
+.rightPanel .marketCapInfo{
+    display: flex;
+}
+.rightPanel .marketCapInfo .marketPrice{}
+.rightPanel .marketCapInfo .marketRate{}
+.rightPanel .fearGreedPanel{}
+.rightPanel .fearGreedPanel .fearGreedPanelHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.rightPanel .fearGreedPanel .fearGreedPanelHeader h2{}
+.rightPanel .fearGreedPanel .fearGreedPanelHeader .fearGreedInfo{
+    display: flex;
+}
+.rightPanel .fearGreedPanel .fearGreedPanelHeader .fearGreedInfo p{}
+.rightPanel .fearGreedPanel{} .fearGreedBody{
+    display: flex;
+    justify-content: space-between;
+}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedEmoji{}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedGraph{}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedGraph .fearGauge{}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedGraph .fearGauge .fearIndicator{}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedGraph .fearGreedLabels{}
+.rightPanel .fearGreedPanel{} .fearGreedBody .fearGreedGraph .fearGreedLabels span{}

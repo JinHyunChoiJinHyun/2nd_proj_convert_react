@@ -1,12 +1,11 @@
 import Header from "./components/header";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div>
       <Header/>
-      <main>
-        <h2>Time to get started!</h2>
-      </main>
+      <Home/>
     </div>
   );
 }

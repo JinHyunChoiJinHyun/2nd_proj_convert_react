@@ -1,0 +1,35 @@
+.header{
+    /* background-color: #4219C2;    */
+    border-bottom: 1px solid #fff;
+    color: #fff; 
+    font-family: "retro";
+}
+.header .nav{    
+    padding: 0.8rem 0;
+}
+.header .nav .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    
+}
+.header .nav .logo{
+    font-size: 1.4rem;
+}
+.header .nav ul{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+.header .nav ul li{    
+}
+.header .nav .searchForm{}
+.header .nav .searchForm input{
+    background-color: transparent;
+    border: 1px solid #fff;
+}
+.header .nav .searchForm .searchBtn{}
+.header .nav .searchForm .logInBtn{}
