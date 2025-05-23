@@ -1,133 +1,31 @@
 import React from 'react'
 import "./Home.css"
+import { coins } from './data'
+import CoinItem from './CoinItem'
 
-const Home = () => {
+const Home = ({setPage, setCoin}) => {
   return (
     <>
       <main>
         <div className="leftPanel">            
             <h2>코인 일기예보</h2>
             <div className="coinTable">    
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
-                <div className="coinItem">
-                    <div className="coinInfo">
-                        <h3 className='coinName'>비트코인</h3>
-                        <p className='coinPrice'>$1,000,000</p>
-                        <p className='coinRate'>+3.34%</p>
-                    </div>
-                    <div className="coinWeather">
-                        <span>☀</span>
-                        <span>☔</span>
-                        <span>☂</span>
-                    </div>                
-                </div>            
+                {coins.map((coin, idx) => {
+                    return (<CoinItem
+                    key={idx}
+                    name={coin.name}
+                    price={coin.price}
+                    rate={coin.rate}
+                    weather_yesterday={coin.weather_yesterday}
+                    weather_today={coin.weather_today}
+                    weather_tomorrow={coin.weather_tomorrow}
+                    onClick = {() => {
+                        setPage("Detail");
+                        setCoin(coin.name)                  
+                    }}
+                    />)                
+                })}    
+                     
             </div>
         </div>
         <div className="rightPanel">            
