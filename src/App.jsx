@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Predict from "./components/Predict";
-import Board from "./components/board";
-import DetailPage from "./components/DetailPage";
-import CoinItem from "./components/CoinItem";
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
+import Predict from "./components/Predict/Predict";
+import Board from "./components/Board/Board";
+import DetailPage from "./components/Home/DetailPage";
+import CoinItem from "./components/Home/CoinItem";
 
 function App() {
   const [page, setPage] = useState("Home")

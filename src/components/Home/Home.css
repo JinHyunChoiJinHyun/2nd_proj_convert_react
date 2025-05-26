@@ -21,6 +21,11 @@ main{
     flex-direction: column;
     gap: 20px;    
 }
+.leftPanel .coinTable .tableContainer{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
 .leftPanel .coinTable .coinItem{
     display: flex;
     justify-content: space-between;
@@ -34,7 +39,11 @@ main{
 .leftPanel .coinTable .coinInfo .coinName{}
 .leftPanel .coinTable .coinInfo .coinPrice{}
 .leftPanel .coinTable .coinInfo .coinRate{}
-.leftPanel .coinTable .coinWeather{}
+.leftPanel .coinTable .coinWeather{
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+}
 .leftPanel .coinTable .coinWeather span{
     font-size: 1.5rem;
 }
@@ -43,9 +52,12 @@ main{
     flex: 1;
     max-width: 600px;
 }
-.rightPanel .marketCapPanel{
+.rightPanel .marketCapPanel{    
+}
+.rightPanel .marketCapPanel .marketHeader{
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 .rightPanel .marketCapPanel h2{}
 .rightPanel .marketCapInfo{
