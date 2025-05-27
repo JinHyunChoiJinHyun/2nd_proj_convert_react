@@ -2,16 +2,20 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import pymysql
 import pymysql.cursors
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv()
+
 # MySQL 연결 설정
 conn = pymysql.connect(
-    host="localhost",
-    user="root",
-    password="981021",
-    db="my_project",
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    db=os.getenv("DB_NAME"),    
     charset="utf8mb4",
     cursorclass=pymysql.cursors.DictCursor
 )
@@ -20,7 +24,7 @@ conn = pymysql.connect(
 def get_news():
     try:
         with conn.cursor() as cursor:
-            sql = "SELECT title FROM news"
+            sql = "SELECT title FROM coin_news"
             cursor.execute(sql)
             result = cursor.fetchall()
             return jsonify(result)

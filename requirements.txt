@@ -1,0 +1,15 @@
+# pip
+pip install datetime pymysql urllib json os dotenv flask_cors
+
+# npm
+
+npm install concurrently --save-dev
+
+# package.json -> 프론트와 백 동시 실행
+"scripts": {
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
+    "dev": "vite",
+    "server": "cd backend && flask run",
+    "build": "vite build",
+    "preview": "vite preview"
+  },

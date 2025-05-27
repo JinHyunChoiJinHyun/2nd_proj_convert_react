@@ -20,6 +20,7 @@ const NewsList = () => {
                 <li key={index}>{title}</li>
             ))}
         </ul>
+        {console.log(titles)}
     </div>
   )
 }
