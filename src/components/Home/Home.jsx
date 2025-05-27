@@ -5,14 +5,17 @@ import CoinItem from './CoinItem'
 import MarketCapGraph from './graph/MarketCapGraph'
 import GoldGraph from './graph/GoldGraph'
 import FearGreedGraph from './graph/FearGreedGraph'
-import WeatherGraph from './graph/WeatherGraph'
+import NewsList from './NewsList'
+
 
 const Home = ({setPage, setCoin}) => {
     const [graph, setGraph] = useState("marketCap")
   return (
     <>
       <main>
-        <WeatherGraph/>
+        <div className="newsPanel">
+            <NewsList />
+        </div>
         <div className="leftPanel">            
             <h2>코인 일기예보</h2>
             <div className="coinTable">    
