@@ -13,10 +13,10 @@ function App() {
     <div>
       <Header setPage={setPage} page={page}/>      
       
-      {page == "Home" && <Home setPage={setPage} setCoin={setCoin}/>}
+      {page == "Home" && <Home setPage={setPage} setCoin={setCoin} coin={coin}/>}
       {page == "Predict" && <Predict/>}      
       {page == "Board" && <Board/>}      
-      {page == "Detail" && <DetailPage coin={coin}/>}      
+      {/* {page == "Detail" && <DetailPage coin={coin}/>}       */}
     </div>
   );
 }

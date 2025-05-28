@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import pymysql
 import pymysql.cursors
@@ -22,10 +22,11 @@ conn = pymysql.connect(
 
 @app.route('/api/news', methods = ["GET"])
 def get_news():
+    keyword = request.args.get("q","")
     try:
         with conn.cursor() as cursor:
-            sql = "SELECT title FROM coin_news"
-            cursor.execute(sql)
+            sql = "SELECT * FROM coin_news WHERE symbol = %s"
+            cursor.execute(sql, (keyword,))
             result = cursor.fetchall()
             return jsonify(result)
     except Exception as e:

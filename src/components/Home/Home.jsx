@@ -8,13 +8,16 @@ import FearGreedGraph from './graph/FearGreedGraph'
 import NewsList from './NewsList'
 
 
-const Home = ({setPage, setCoin}) => {
+const Home = ({setPage, setCoin, coin}) => {
     const [graph, setGraph] = useState("marketCap")
+    const [symbol, setSymbol] = useState("btc")
   return (
     <>
       <main>
         <div className="newsPanel">
-            <NewsList />
+            <NewsList            
+            symbol = {symbol}/>               
+            
         </div>
         <div className="leftPanel">            
             <h2>코인 일기예보</h2>
@@ -30,9 +33,9 @@ const Home = ({setPage, setCoin}) => {
                         weather_yesterday={coin.weather_yesterday}
                         weather_today={coin.weather_today}
                         weather_tomorrow={coin.weather_tomorrow}
-                        onClick = {() => {
-                            setPage("Detail");
+                        onClick = {() => {                            
                             setCoin(coin.name)                  
+                            setSymbol(coin.symbol)                  
                     }}
                     />
                     </div>
@@ -41,6 +44,7 @@ const Home = ({setPage, setCoin}) => {
                      
             </div>
         </div>
+        
         <div className="rightPanel">            
             <div className="marketCapPanel">
                 <div className="graphTab">

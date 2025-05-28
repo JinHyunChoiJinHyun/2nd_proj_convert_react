@@ -1,5 +1,7 @@
 main{    
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-rows: 100px;
     justify-content: space-between;
     width: 100%;
     max-width: 1200px; 
@@ -7,9 +9,14 @@ main{
     font-family: "retro";
 }
 
+.newsPanel{    
+    height: 50px;
+    overflow: hidden;
+}
+
 .leftPanel{
     flex: 1;
-    max-width: 400px;
+    max-width: 400px;    
 }
 .leftPanel h2{}
 .leftPanel .coinTable{
@@ -49,8 +56,10 @@ main{
 }
 
 .rightPanel{
-    flex: 1;
+    /* flex: 1; */
     max-width: 600px;
+    grid-row: 1/3;
+    grid-column: 2/3;
 }
 .rightPanel .marketCapPanel{    
 }
