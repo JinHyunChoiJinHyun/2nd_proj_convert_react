@@ -31,6 +31,20 @@ def get_news():
             return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/changeRate', methods = ["GET"])
+def get_change_rate():
+    keyword = request.args.get("q","")
+    try:        
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM coin_past_info WHERE pair = %s"
+            cursor.execute(sql, (keyword,))
+            rows = cursor.fetchall()
+            # print(f"row: {rows}")
+            data = [row["change_24h"] for row in rows]
+            return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

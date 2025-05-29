@@ -21,7 +21,7 @@ const NewsList = ({symbol}) => {
                 <li key={index}>{title}</li>
             ))}
         </ul>      
-        {console.log(`http://localhost:5000/api/news?q=${symbol}`)}  
+        {/* {console.log(`http://localhost:5000/api/news?q=${symbol}`)}   */}
     </div>
   )
 }

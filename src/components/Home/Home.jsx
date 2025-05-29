@@ -8,9 +8,10 @@ import FearGreedGraph from './graph/FearGreedGraph'
 import NewsList from './NewsList'
 
 
-const Home = ({setPage, setCoin, coin}) => {
+const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
     const [graph, setGraph] = useState("marketCap")
     const [symbol, setSymbol] = useState("btc")
+    const [pair, setPair] = useState("btcusdt")
   return (
     <>
       <main>
@@ -34,8 +35,9 @@ const Home = ({setPage, setCoin, coin}) => {
                         weather_today={coin.weather_today}
                         weather_tomorrow={coin.weather_tomorrow}
                         onClick = {() => {                            
-                            setCoin(coin.name)                  
-                            setSymbol(coin.symbol)                  
+                            setSelectedCoin(coin.name)                  
+                            setSymbol(coin.symbol)  
+                            setPair(coin.pair)                
                     }}
                     />
                     </div>
@@ -59,7 +61,7 @@ const Home = ({setPage, setCoin, coin}) => {
                         }}>금</li>
                     </ul>
                 </div>                                    
-                {graph == "marketCap" &&<MarketCapGraph />}
+                {graph == "marketCap" &&<MarketCapGraph selectedCoin={selectedCoin} pair={pair}/>}
                 {graph == "gold" &&<GoldGraph />}
                               
             </div>

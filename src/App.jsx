@@ -8,12 +8,12 @@ import CoinItem from "./components/Home/CoinItem";
 
 function App() {
   const [page, setPage] = useState("Home")
-  const [coin, setCoin] = useState(null)
+  const [selectedCoin, setSelectedCoin] = useState("비트코인")
   return (
     <div>
       <Header setPage={setPage} page={page}/>      
       
-      {page == "Home" && <Home setPage={setPage} setCoin={setCoin} coin={coin}/>}
+      {page == "Home" && <Home setPage={setPage} setSelectedCoin={setSelectedCoin} selectedCoin={selectedCoin}/>}
       {page == "Predict" && <Predict/>}      
       {page == "Board" && <Board/>}      
       {/* {page == "Detail" && <DetailPage coin={coin}/>}       */}

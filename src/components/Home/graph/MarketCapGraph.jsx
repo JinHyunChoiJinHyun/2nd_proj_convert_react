@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -10,6 +10,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
+import { coins } from '../../data';
 
 ChartJS.register(
     CategoryScale,
@@ -21,36 +22,56 @@ ChartJS.register(
     Legend
 );
 
-const MarketCapGraph = () => {
+const MarketCapGraph = ({selectedCoin, pair}) => {
+
+    const selectedCoinInData = coins.find(coin => coin.name === selectedCoin) // map + filter
+
+    const [chartData, setChartData] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch(`http://localhost:5000/api/changeRate?q=${pair}`);
+            const data = await res.json();
+            setChartData(data);
+        }
+        fetchData();
+    }, [pair])
+   
+
     const data = {
         labels: ["1월", "2월", "3월", "4월", "5월"],
         datasets:[
             {
-                label:"시가총액",
-                data: [12, 19, 3, 5, 2],
+                label:selectedCoinInData.name,
+                data: chartData,
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
                 tension: 0.3,
             },
         ],
-    };
+    };    
 
     const options = {
         responsive: true,
         plugins:{
             legend:{position:"top"},
-            title:{display:true, text:"시가총액 그래프"}
+            title:{display:true, text:selectedCoinInData.name}
         },
-    };
+    };    
+    console.log(chartData)
   return (
     <>
-        <div className="marketHeader">
-            <h2>시가 총액</h2>
-            <div className="marketCapInfo">
-                <p className='marketPrice'>₩4.04P</p>
-                <p className='marketRate'>▼ 0.86%</p>
-            </div>
-        </div>
+        {selectedCoinInData && (
+            <div className="marketHeader">
+                <h2>{selectedCoinInData.name}</h2>
+                <div className="marketCapInfo">
+                    <p className='marketPrice'>{selectedCoinInData.price}</p>
+                    <p className='marketRate'>{selectedCoinInData.rate}</p>
+                </div>      
+                
+            </div>   
+        )}     
+        
         <Line data = {data} options = {options} />
     </>
   )
