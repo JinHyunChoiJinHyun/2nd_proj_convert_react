@@ -13,9 +13,10 @@ export const coins = [
     {
         name: "이더리움",
         symbol: "eth",
+        pair: "ethusdt",
         price: 1200000,
         rate: "-2.34%",
-        data: [6, 3, 1, 3, 14],
+        data: [],
         weather_yesterday: "☀",
         weather_today: "☔",
         weather_tomorrow: "☂"
@@ -23,9 +24,10 @@ export const coins = [
     {
         name: "도지코인",
         symbol: "doge",
+        pair: "dogeusdt",
         price: 4000000,
         rate: "+6.34%",
-        data: [1, 9, 3, 12, 8],
+        data: [],
         weather_yesterday: "☀",
         weather_today: "☔",
         weather_tomorrow: "☂"
@@ -33,9 +35,10 @@ export const coins = [
     {
         name: "시바코인",
         symbol: "shib",
+        pair: "shibusdt",
         price: 10000,
         rate: "+3.34%",
-        data: [12, 19, 3, 5, 2],
+        data: [],
         weather_yesterday: "☀",
         weather_today: "☔",
         weather_tomorrow: "☂"
@@ -43,9 +46,10 @@ export const coins = [
     {
         name: "jh코인",
         symbol: "jh",
+        pair: "jhusdt",
         price: 80000,
         rate: "-19.34%",
-        data: [12, 19, 3, 5, 2],
+        data: [],
         weather_yesterday: "☀",
         weather_today: "☔",
         weather_tomorrow: "☂"

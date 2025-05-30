@@ -45,7 +45,7 @@ const GoldGraph = () => {
   return (
     <>
         <div className="goldHeader">
-            <h2>금</h2>
+            <h2>일별</h2>
             <div className="goldInfo">
                 <p className='goldPrice'>₩4.04P</p>
                 <p className='goldRate'>▼ 0.86%</p>

@@ -45,6 +45,14 @@ def calculate_change_rate(df_day):
         # # 일 단위 변동률
         coin_date_change["daily_change"] = coin_date_change["close_price"].pct_change() * 100
         
+        # 주간 변동률        
+        
+        coin_date_change["week_date"] = df_day["open_time"] - pd.Timedelta(days=7)
+        
+        price_week_past = coin_date_change[["open_time", "close_price"]].copy()
+        
+        
+        
         # 연간 변동률
         years = [1,2,3]
         for y in years:

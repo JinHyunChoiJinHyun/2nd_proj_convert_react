@@ -54,11 +54,11 @@ const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
                         <li 
                         onClick={() => {
                             setGraph("marketCap")
-                        }}>시가총액</li>
+                        }}>시간별</li>
                         <li
                         onClick={() => {
                             setGraph("gold")
-                        }}>금</li>
+                        }}>일별</li>
                     </ul>
                 </div>                                    
                 {graph == "marketCap" &&<MarketCapGraph selectedCoin={selectedCoin} pair={pair}/>}
