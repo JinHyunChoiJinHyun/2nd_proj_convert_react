@@ -58,7 +58,7 @@ const MarketCapGraph = ({selectedCoin, pair}) => {
             title:{display:true, text:selectedCoinInData.name}
         },
     };    
-    console.log(chartData)
+    // console.log(chartData)
   return (
     <>
         {selectedCoinInData && (

@@ -47,11 +47,37 @@ def calculate_change_rate(df_day):
         
         # 주간 변동률        
         
-        coin_date_change["week_date"] = df_day["open_time"] - pd.Timedelta(days=7)
+        coin_date_change["week_date_ago"] = df_day["open_time"] - pd.Timedelta(days=7)
         
         price_week_past = coin_date_change[["open_time", "close_price"]].copy()
+        price_week_past.rename(columns = {
+            "open_time": "week_date_ago",
+            "close_price": "close_price_week_past"
+        }, inplace = True)
         
+        coin_date_change = pd.merge(
+            coin_date_change, price_week_past, on = "week_date_ago", how = "left"
+        )
         
+        coin_date_change["weekly_change_rate"] = ((coin_date_change["close_price"] - coin_date_change["close_price_week_past"]) / coin_date_change["close_price_week_past"]) * 100   
+        
+        # 월간 변동률
+        
+        coin_date_change["month_date_ago"] = df_day["open_time"] - pd.DateOffset(months=1)
+        
+        price_week_past = coin_date_change[["open_time", "close_price"]].copy()
+        price_week_past.rename(columns = {
+            "open_time": "month_date_ago",
+            "close_price": "close_price_month_past"
+        }, inplace = True)
+        
+        coin_date_change = pd.merge(
+            coin_date_change, price_week_past, on = "month_date_ago", how = "left"
+        )
+        
+        coin_date_change["monthly_change_rate"] = ((coin_date_change["close_price"] - coin_date_change["close_price_month_past"]) / coin_date_change["close_price_month_past"]) * 100   
+        
+    # print(coin_date_change)        
         
         # 연간 변동률
         years = [1,2,3]
@@ -97,13 +123,13 @@ def input_coin_change(coin_changes):
             for _, row in df.iterrows():
                 cur.execute("""
                     INSERT IGNORE INTO coin_past_info(
-                        pair,open_date  ,current_price  ,change_24h  ,change_3Y  ,change_2Y  ,change_1Y, market_cap_rank ,created_at,updated_at,deleted_at
+                        pair,open_date  ,current_price  ,change_24h, change_week, change_month ,change_3Y  ,change_2Y  ,change_1Y, market_cap_rank ,created_at,updated_at,deleted_at
                     ) VALUES (
-                        %s, %s, %s, %s, %s, %s,
+                        %s, %s, %s, %s, %s, %s, %s, %s,
                         %s,1, NOW(), NOW(), NOW()
                     )         
                 """, (
-                    row["pair"], row.get("open_time", 0), row.get("close_price", 0), row.get("daily_change", 0), row.get("3_year_change", 0), row.get("2_year_change", 0), row.get("1_year_change", 0)
+                    row["pair"], row.get("open_time", 0), row.get("close_price", 0), row.get("daily_change", 0), row.get("weekly_change_rate",0), row.get("monthly_change_rate",0), row.get("3_year_change", 0), row.get("2_year_change", 0), row.get("1_year_change", 0)
                 ))
         connection.commit()
         print("데이터 저장 완료")

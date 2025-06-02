@@ -62,7 +62,7 @@ const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
                     </ul>
                 </div>                                    
                 {graph == "marketCap" &&<MarketCapGraph selectedCoin={selectedCoin} pair={pair}/>}
-                {graph == "gold" &&<GoldGraph />}
+                {graph == "gold" &&<GoldGraph selectedCoin={selectedCoin} pair={pair}/>}
                               
             </div>
             
