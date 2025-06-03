@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import "./Home.css"
 import { coins } from '../data'
 import CoinItem from './CoinItem'
-import MarketCapGraph from './graph/MarketCapGraph'
+import HourGraph from './graph/HourGraph'
 import GoldGraph from './graph/GoldGraph'
 import FearGreedGraph from './graph/FearGreedGraph'
 import NewsList from './NewsList'
 
 
 const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
-    const [graph, setGraph] = useState("marketCap")
+    const [graph, setGraph] = useState("HourGraph")
     const [symbol, setSymbol] = useState("btc")
     const [pair, setPair] = useState("btcusdt")
   return (
@@ -53,7 +53,7 @@ const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
                     <ul>
                         <li 
                         onClick={() => {
-                            setGraph("marketCap")
+                            setGraph("HourGraph")
                         }}>시간별</li>
                         <li
                         onClick={() => {
@@ -61,7 +61,7 @@ const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
                         }}>일별</li>
                     </ul>
                 </div>                                    
-                {graph == "marketCap" &&<MarketCapGraph selectedCoin={selectedCoin} pair={pair}/>}
+                {graph == "HourGraph" &&<HourGraph selectedCoin={selectedCoin} pair={pair}/>}
                 {graph == "gold" &&<GoldGraph selectedCoin={selectedCoin} pair={pair}/>}
                               
             </div>

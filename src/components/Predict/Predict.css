@@ -1,0 +1,13 @@
+.predictTitle{
+    text-align: center;
+    margin: 5rem auto;
+    border-bottom: 1px solid #fff;
+    width: 50%;
+}
+.predictTitle h2{
+    font-family: "retro";
+    margin-bottom: 1rem;
+}
+.predictTitle p{
+    margin-bottom: 2rem;
+}

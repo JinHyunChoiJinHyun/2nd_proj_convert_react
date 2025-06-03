@@ -22,7 +22,7 @@ ChartJS.register(
     Legend
 );
 
-const MarketCapGraph = ({selectedCoin, pair}) => {
+const HourGraph = ({selectedCoin, pair}) => {
 
     const selectedCoinInData = coins.find(coin => coin.name === selectedCoin) // map + filter
 
@@ -77,4 +77,4 @@ const MarketCapGraph = ({selectedCoin, pair}) => {
   )
 }
 
-export default MarketCapGraph
+export default HourGraph
