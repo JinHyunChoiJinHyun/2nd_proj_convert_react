@@ -1,15 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react'
+import {coins} from "../data.js"
 
 const Dropdown = () => {
-
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const dropdownRef = useRef(null); // dropdown 영역만 기억 -> 컨트롤은 state를 통해 진행 	// 특정 DOM 요소(영역)를 기억해두는 용도 직접 컨트롤 기능은 없고, 그냥 ‘여기가 어디다!’ 라고 표시하는 역할
     //useRef는 ‘영역 표시기’
-    //useState는 ‘기능 스위치’ 같은 개념
-    
-
-    const options = ["사과", "바나나", "체리"]
+    //useState는 ‘기능 스위치’ 같은 개념    
 
     useEffect(() => {
         const handleClickOutside = (e) => { 
@@ -36,12 +33,12 @@ const Dropdown = () => {
         </button>
         {isOpen &&(
             <ul>
-                {options.map((option) => (
-                    <li key={{option}}>
+                {coins.map((coin) => (
+                    <li key={{coin}}>
                         <button
-                            onClick={() => {handleSelect(option)}}
+                            onClick={() => {handleSelect(coin)}}
                         >
-                            {option}
+                            {coin.name}
                         </button>
                     </li>
                 ))}

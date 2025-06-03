@@ -1,5 +1,5 @@
 # pip
-pip install datetime pymysql urllib json os dotenv flask_cors
+pip install datetime pymysql dotenv flask_cors requests
 
 # npm
 

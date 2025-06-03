@@ -19,7 +19,7 @@ def connect_mysql():
 
 def fetch_coin_to_mysql():
     coins = ["BTCUSDT", "ETHUSDT", "XRPUSDT", "BNBUSDT", "SOLUSDT", "DOGEUSDT", "ADAUSDT","TRXUSDT", "SHIBUSDT", "LTCUSDT"]   
-    
+    connection = None
     try:
         connection = connect_mysql()
         cur = connection.cursor()
