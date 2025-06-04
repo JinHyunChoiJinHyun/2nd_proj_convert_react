@@ -25,7 +25,9 @@ const Home = ({setPage, setSelectedCoin, selectedCoin}) => {
             <div className="coinTable">    
                 {coins.map((coin, idx) => {
                     return (
-                    <div className="tableContainer">
+                    <div 
+                    key = {idx}
+                    className="tableContainer">
                         <CoinItem
                         key={idx}
                         name={coin.name}
