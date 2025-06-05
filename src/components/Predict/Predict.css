@@ -1,13 +1,50 @@
-.predictTitle{
+#predictContainer{
+    background-color: #fff;
+    color: #111;
+    padding: 1rem;
+    width: 60%;
+    margin-top: 2rem;
+}
+
+#predictContainer .predictTitle{
     text-align: center;
-    margin: 5rem auto;
+    margin: 2rem auto;
     border-bottom: 1px solid #fff;
     width: 50%;
 }
-.predictTitle h2{
+#predictContainer .predictTitle h2{
     font-family: "retro";
     margin-bottom: 1rem;
 }
-.predictTitle p{
+#predictContainer .predictTitle p{
     margin-bottom: 2rem;
+}
+
+#predictContainer .tab{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 1rem;
+}
+#predictContainer .tab p{
+    cursor: pointer;
+}
+
+.dropdownWrapper{
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.dropdownWrapper .choiceCoin{
+    display: flex;
+    gap: 15px;
+}
+.dropdownWrapper .choicePeriod{
+    display: flex;
+    gap: 15px;
+}
+
+.dropdownWrapper .inputPrice{
+    display: flex;
+    gap: 15px;
 }

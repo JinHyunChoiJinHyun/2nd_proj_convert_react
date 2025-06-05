@@ -1,0 +1,38 @@
+.dropdownContainer{
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownBtn{
+    background-color: #111;
+    color: #fff;
+    border: 1px solid #fff;   
+    padding: 5px 10px; 
+    letter-spacing: 1px;
+    border-radius: 3px;
+    width: 10rem;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.dropdownBtn .downArrow{    
+}
+.dropdownMenu{
+    position: absolute;
+    background-color: #111;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
+.dropdownMenu li{
+    text-align: center;    
+}
+.dropdownMenu li button{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 1px;
+    padding: 0.4rem 0;
+}

@@ -1,0 +1,40 @@
+#boardContainer{
+    background-color: #fff;
+    color: #111;
+    padding: 1rem;
+    width: 60%;
+    margin-top: 2rem;
+}
+#boardContainer .boardTitle{
+    text-align: left;    
+    width: 50%;
+    margin-bottom: 2rem;
+    
+}
+#boardContainer nav{    
+}
+#boardContainer nav ul{
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    border-bottom: 1px solid #111;
+    padding-bottom: 0.5rem;
+    
+}
+#boardContainer nav ul li{}
+#boardContainer .searchContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+#boardContainer .sort{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+#boardContainer .sort p{}
+#boardContainer form{}
+#boardContainer form input{}
+#boardContainer form .searchBtn{}
+#boardContainer .createBtn{}
+

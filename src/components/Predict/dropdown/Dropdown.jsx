@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react'
+import "./Dropdown.css"
 
 
-const Dropdown = ({options,pastOptions}) => {
+const Dropdown = ({options,className = ""}) => {
     const [isOpen, setIsOpen] = useState(false);    
     const [selected, setSelected] = useState(null);    
     const dropdownRef = useRef(null); // dropdown 영역만 기억 -> 컨트롤은 state를 통해 진행 	// 특정 DOM 요소(영역)를 기억해두는 용도 직접 컨트롤 기능은 없고, 그냥 ‘여기가 어디다!’ 라고 표시하는 역할
@@ -19,23 +20,22 @@ const Dropdown = ({options,pastOptions}) => {
     }, [])
 
     const handleSelect = (option) => {
-        setSelected(option);
-        setPeriodSelected(option);
-        setIsOpen(false);
+        setSelected(option);        
+        setIsOpen(!isOpen);
     }    
 
   return (
-    <div ref={dropdownRef}>
+    <div ref={dropdownRef} className={`dropdownContainer ${className}`}>
         <button
             onClick={() => setIsOpen(!isOpen)}
-            className='btn'
+            className='dropdownBtn'
         >
             {selected || "옵션을 선택하세요"}
-            <span className='float-right'>▼</span>
+            <span className='downArrow'>▼</span>
         </button>       
         
         {isOpen &&(
-            <ul>
+            <ul className='dropdownMenu'>
                 {options.map((option,idx) => (
                     <li key={idx}>
                         <button
