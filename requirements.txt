@@ -3,7 +3,7 @@ pip install datetime pymysql dotenv flask_cors requests
 
 # npm
 
-npm install concurrently --save-dev
+npm install concurrently axios --save-dev
 
 # package.json -> 프론트와 백 동시 실행
 "scripts": {

@@ -95,6 +95,96 @@ def get_change_week_rate():
         import traceback
         traceback.print_exc()
         return (jsonify({'error': str(e)}), 500)
+    
+# 게시판 관련 api
+@app.route("/api/posts", methods= ['GET'])
+def get_posts():
+    try:
+        conn = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),    
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        with conn.cursor() as cursor:
+            sql = "SELECT * FROM posts"
+            cursor.execute(sql)
+            posts = cursor.fetchall()
+        return jsonify(posts)
+    except Exception as e:
+        print("error in api")
+        import traceback
+        traceback.print_exc()
+        return (jsonify({"error": str(e)}), 500)    
+
+    
+@app.route("/api/posts", methods = ["POST"])
+def create_post():
+    data = request.get_json()
+    title = data["title"]
+    content = data["content"]
+    try:
+        conn = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),    
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO posts (title, content) VALUES (%s, %s)"
+            cursor.execute(sql, (title, content))
+            conn.commit()
+            post_id = cursor.lastrowid
+        return jsonify({"id": post_id, "title": title, "content": content }), 201
+    except Exception as e:
+        print("error in api")
+        import traceback
+        traceback.print_exc()
+        return (jsonify({"error": str(e)}), 500)
+
+@app.route("/api/posts/<int:post_id>",methods = ["DELETE"])
+def delete_post(post_id):
+    try:
+        conn = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),    
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        with conn.cursor() as cursor:
+            sql = "DELETE FROM posts WHERE id = %s"
+            cursor.execute(sql, (post_id,))
+            conn.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}),500
+    
+@app.route("/api/posts/<int:post_id>", methods = ["PUT"])
+def update_post(post_id):
+    data = request.json
+    try:
+        conn = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),    
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        with conn.cursor() as cursor:
+            sql = "UPDATE posts SET title = %s, content = %s WHERE id = %s"
+            cursor.execute(sql,(data["title"], data["content"], post_id))
+            conn.commit()
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+        
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
