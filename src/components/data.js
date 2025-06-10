@@ -1,4 +1,4 @@
-export const coins = [
+export const coins = [    
     {
         name: "비트코인",
         symbol: "btc",        

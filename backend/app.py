@@ -125,6 +125,7 @@ def create_post():
     data = request.get_json()
     title = data["title"]
     content = data["content"]
+    coin = data["coin"]
     try:
         conn = pymysql.connect(
             host=os.getenv("DB_HOST"),
@@ -135,11 +136,11 @@ def create_post():
             cursorclass=pymysql.cursors.DictCursor
         )
         with conn.cursor() as cursor:
-            sql = "INSERT INTO posts (title, content) VALUES (%s, %s)"
-            cursor.execute(sql, (title, content))
+            sql = "INSERT INTO posts (title, content, coin) VALUES (%s, %s, %s)"
+            cursor.execute(sql, (title, content, coin))
             conn.commit()
             post_id = cursor.lastrowid
-        return jsonify({"id": post_id, "title": title, "content": content }), 201
+        return jsonify({"id": post_id, "title": title, "content": content, "coin":coin }), 201
     except Exception as e:
         print("error in api")
         import traceback
@@ -178,8 +179,8 @@ def update_post(post_id):
             cursorclass=pymysql.cursors.DictCursor
         )
         with conn.cursor() as cursor:
-            sql = "UPDATE posts SET title = %s, content = %s WHERE id = %s"
-            cursor.execute(sql,(data["title"], data["content"], post_id))
+            sql = "UPDATE posts SET title = %s, content = %s, coin = %s WHERE id = %s"
+            cursor.execute(sql,(data["title"], data["content"], data["coin"], post_id))
             conn.commit()
         return jsonify({"success": True})
     except Exception as e:

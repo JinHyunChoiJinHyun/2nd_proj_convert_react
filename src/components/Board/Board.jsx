@@ -6,7 +6,11 @@ import axios from "axios";
 
 const Board = () => {
   const formRef = useRef(null)
-  const options = coins.map((coin => (coin.name)))
+
+  const options1 = ["전체", ...coins.map((coin => (coin.name)))]
+  const options2 = coins.map((coin => (coin.name)))
+
+  const [selectedCoin, setSelectedCoin] = useState("전체")
 
   const [posts, setPosts] = useState([]);
 
@@ -15,6 +19,8 @@ const Board = () => {
   const [title, setTitle] = useState("");
 
   const [content, setContent] = useState("");
+
+  const [coin, setCoin] = useState("");
 
   // post 수정
 
@@ -31,6 +37,10 @@ const Board = () => {
     .catch(console.error);
   }, []);
 
+  // filter
+  const filteredPosts = selectedCoin === "전체"
+  ? posts : posts.filter(post => post.coin === selectedCoin)
+
   // 모달 창 닫기
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -45,7 +55,7 @@ const Board = () => {
   // post로 전송
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = {title, content};
+    const newPost = {title, content, coin};
     if (isEditing){
       axios.put(`http://localhost:5000/api/posts/${editPost.id}`, newPost)
       .then(() => {
@@ -56,8 +66,8 @@ const Board = () => {
       {console.log(`http://localhost:5000/api/posts/${editPost.id}`)}
     }
     else{      
-      axios.post("http://localhost:5000/api/posts", {title, content})
-      .then((res) => {
+      axios.post("http://localhost:5000/api/posts", newPost)
+      .then((res) => {        
         setPosts([res.data, ...posts])
         setTitle("");
         setContent("");
@@ -70,6 +80,7 @@ const Board = () => {
   const resetForm = () => {
     setTitle("");
     setContent("");
+    setCoin("");
     setEditPost(null);
     setIsEditing(false);
     setShowForm(false);
@@ -89,6 +100,7 @@ const Board = () => {
     setEditPost(post);
     setTitle(post.title);
     setContent(post.content);
+    setCoin(post.coin);
     setIsEditing(true);
     setShowForm(true)
   }
@@ -107,7 +119,10 @@ const Board = () => {
         <div className="searchContainer">          
           <div className="sort">
             <p>종목</p>
-            <Dropdown options={options}/>
+            <Dropdown 
+            options={options1}
+            onChange={setSelectedCoin}
+            />
           </div>
           <div>
             <input type="text" />
@@ -121,12 +136,18 @@ const Board = () => {
                 ref={formRef}
                 onSubmit={handleSubmit}
                 className='createPostForm'
-                >
+                >                  
                   <input 
                   type="text"
                   placeholder='제목'
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
+                  />
+                  <label htmlFor="">종목 선택:</label>
+                  <Dropdown
+                    options={options2}
+                    selected={coin}
+                    onChange={setCoin} // 자식 컴포넌트의 값을 바로 가져올 수 있음
                   />
                   <textarea 
                   placeholder='내용'
@@ -140,7 +161,10 @@ const Board = () => {
                   </button>   
                   <button
                   type='button'
-                  onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setShowForm(false)
+                    resetForm()
+                  }}
                   >
                     취소
                   </button>               
@@ -150,10 +174,10 @@ const Board = () => {
           </div>
         </div>
         <ul>
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <li key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
+              <h2>{post.title}({post.coin})</h2>
+              <p>{post.content}</p>              
               <button onClick={() => handleEdit(post)}>수정</button>
               <button onClick={() => handleDelete(post.id)}>삭제</button>              
             </li>
