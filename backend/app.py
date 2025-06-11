@@ -20,6 +20,7 @@ conn = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor
 )
 
+# 뉴스 api
 @app.route('/api/news', methods = ["GET"])
 def get_news():
     keyword = request.args.get("q","")
@@ -39,7 +40,8 @@ def get_news():
             return jsonify(result)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+# 변동률 api
 @app.route('/api/changeRate', methods = ["GET"])
 def get_change_rate():
     keyword = request.args.get("q","")

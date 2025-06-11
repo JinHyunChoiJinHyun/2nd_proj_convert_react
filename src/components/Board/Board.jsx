@@ -22,6 +22,9 @@ const Board = () => {
 
   const [coin, setCoin] = useState("");
 
+  const [inputText, setInputText] = useState("");
+  const [searchText, setSearchText] = useState("");
+
   // post 수정
 
   const [isEditing, setIsEditing] = useState(false);
@@ -37,9 +40,10 @@ const Board = () => {
     .catch(console.error);
   }, []);
 
-  // filter
-  const filteredPosts = selectedCoin === "전체"
-  ? posts : posts.filter(post => post.coin === selectedCoin)
+  // 검색 및 분류
+  const filteredPosts = posts
+  .filter(post => selectedCoin === "전체" ||  post.coin === selectedCoin)
+  .filter(post => post.title.toLowerCase().includes(searchText.toLowerCase()) || post.content.toLowerCase().includes(searchText.toLowerCase())) 
 
   // 모달 창 닫기
   useEffect(() => {
@@ -125,8 +129,15 @@ const Board = () => {
             />
           </div>
           <div>
-            <input type="text" />
-            <button className='searchBtn'>검색</button>
+            <input 
+            type="text"
+            value={inputText} // state 값을 input 창에 출력 -> onChange가 없을 시 값이 업데이트 되지 않아 input 창에 입력을 해도 값이 변하지 않음
+            onChange={(e) => setInputText(e.target.value)} // input 값이 변할 떄 마다 state 값 업데이트
+            />
+            <button 
+            className='searchBtn'
+            onClick={()=>setSearchText(inputText)}            
+            >검색</button>
             <button className='createBtn'
             onClick={handleNewPost}
             >새 글 작성</button>
