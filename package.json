@@ -4,7 +4,7 @@
   "scripts": {
     "start": "concurrently \"npm run dev\" \"npm run server\"",
     "dev": "vite",
-    "server": "cd backend && flask run",
+    "server": "cd backend && flask run --host=127.0.0.1 --port=5050",
     "build": "vite build",
     "preview": "vite preview"
   },

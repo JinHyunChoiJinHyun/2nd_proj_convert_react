@@ -30,7 +30,7 @@ const GoldGraph = ({selectedCoin, pair}) => {
 
     useEffect(() => {
             const fetchData = async () => {
-                const res = await fetch(`http://localhost:5000/api/changeWeekRate?q=${pair}`);
+                const res = await fetch(`http://localhost:5050/api/changeWeekRate?q=${pair}`);
                 const data = await res.json();
                 setChartData(data);
             }

@@ -30,7 +30,7 @@ const HourGraph = ({selectedCoin, pair}) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch(`http://localhost:5000/api/changeRate?q=${pair}`);
+            const res = await fetch(`http://localhost:5050/api/changeRate?q=${pair}`);
             const data = await res.json();
             setChartData(data);
         }

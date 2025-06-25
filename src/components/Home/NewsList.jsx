@@ -5,7 +5,7 @@ const NewsList = ({symbol}) => {
     const [titles, setTitles] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/news?q=${symbol}`)
+        fetch(`http://localhost:5050/api/news?q=${symbol}`)
         .then(res => res.json())
         .then(data => {
             const onlyTitles = data.map(item => item.title);

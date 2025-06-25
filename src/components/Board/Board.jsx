@@ -35,7 +35,7 @@ const Board = () => {
     setShowForm(true);
   }
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/posts`)
+    axios.get(`http://localhost:5050/api/posts`)
     .then((res) => setPosts(res.data))
     .catch(console.error);
   }, []);
@@ -61,16 +61,16 @@ const Board = () => {
     e.preventDefault();
     const newPost = {title, content, coin};
     if (isEditing){
-      axios.put(`http://localhost:5000/api/posts/${editPost.id}`, newPost)
+      axios.put(`http://localhost:5050/api/posts/${editPost.id}`, newPost)
       .then(() => {
         setPosts(posts.map(p => p.id === editPost.id ? {...p, ...newPost} : p)) // posts의 id가 editPost(수정된 post)의 id와 같다면 새로운 입력값으로 수정 아니라면 그대로
         resetForm();
       })
       .catch(console.error);
-      {console.log(`http://localhost:5000/api/posts/${editPost.id}`)}
+      {console.log(`http://localhost:5050/api/posts/${editPost.id}`)}
     }
     else{      
-      axios.post("http://localhost:5000/api/posts", newPost)
+      axios.post("http://localhost:5050/api/posts", newPost)
       .then((res) => {        
         setPosts([res.data, ...posts])
         setTitle("");
@@ -92,7 +92,7 @@ const Board = () => {
 
   // post 삭제
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/api/posts/${id}`)
+    axios.delete(`http://localhost:5050/api/posts/${id}`)
     .then(() => {
       setPosts(posts.filter((post) => post.id !== id))      
     })
