@@ -98,6 +98,29 @@ def get_change_week_rate():
         traceback.print_exc()
         return (jsonify({'error': str(e)}), 500)
     
+# 예측률 api
+
+# 7일
+@app.route("/api/predicts", methods = ["GET"])
+def get_prediction():
+    keyword = request.args.get("q", "")
+    try:
+        conn = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),    
+            charset="utf8mb4",
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        with conn.cursor() as cursor:
+            sql = "SELECT predict_return_7d FROM coin_prediction WHERE pair = %s"
+            cursor.execute(sql, (keyword,))
+            result = cursor.fetchall()
+            return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 # 게시판 관련 api
 @app.route("/api/posts", methods= ['GET'])
 def get_posts():

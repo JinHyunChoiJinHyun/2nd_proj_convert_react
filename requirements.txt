@@ -5,11 +5,11 @@ pip install datetime pymysql dotenv flask_cors requests
 
 npm install concurrently axios --save-dev
 
-# package.json -> 프론트와 백 동시 실행
+# package.json에 작성 -> 프론트와 백 동시 실행
 "scripts": {
     "start": "concurrently \"npm run dev\" \"npm run server\"",
     "dev": "vite",
-    "server": "cd backend && flask run",
+    "server": "cd backend && flask run --host=127.0.0.1 --port=5050",
     "build": "vite build",
     "preview": "vite preview"
   },
