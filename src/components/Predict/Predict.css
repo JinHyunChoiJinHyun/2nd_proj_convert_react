@@ -48,3 +48,28 @@
     display: flex;
     gap: 15px;
 }
+
+.predictResultContainer{
+    
+}
+.predictResultContainer .predictResultTitle{
+    text-align: center;
+    margin: 2rem auto;
+    border-bottom: 1px solid #fff;
+    width: 50%;
+}
+.predictResultContainer .predictResultText{}
+.predictResultContainer .predictGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);    
+    width: 95%;
+    margin: 0 auto;
+    gap: 20px;
+}
+.predictResultContainer .predictGrid .gridBox{
+    border: 1px solid #111;
+    border-radius: 5px;
+    padding: 0.7rem;
+}
+.predictResultContainer .predictGrid .gridBox .gridBoxTitle{}
+.predictResultContainer .predictGrid .gridBox .girdBoxContent{}
