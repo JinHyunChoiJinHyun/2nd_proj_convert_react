@@ -1,5 +1,5 @@
 # pip
-pip install datetime pymysql dotenv flask_cors requests
+pip install datetime pymysql dotenv flask_cors requests prophet cryptography
 
 # npm
 

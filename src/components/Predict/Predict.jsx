@@ -1,16 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Predict.css"
 import Dropdown from './dropdown/Dropdown'
 import { coins } from '../data'
+import axios from 'axios'
 
 
 const Predict = () => {
   const [periodSelected, setPeriodSelected] = useState("과거")
   const option1 = coins.map((coin => (coin.name)))
+  const coinSymbol = coins.map((coin => (coin.pair)))
   const option2 = {
     "과거":["1년 전", "2년 전", "3년 전"],
     "미래":["7일 후", "15일 후", "30일 후"],
   }
+
+
+  // 예측 기간 선택
+  const [selectedPredictPeriod, setSelectedPredictPeriod] = useState(null)
+
+  // 예측 코인 선택
+  const [selectedCoinSymbol, setSelectedCoinSymbol] = useState(null)
+
+  // 예측 데이터 선택
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    const handlePeriodChange = async () => {
+    try{
+      const response = await axios.get(`http://localhost:5050/api/predicts?q=${selectedCoinSymbol}`)
+      setData(response.data);      
+    } catch(err){
+      console.error('Erro fetching data:', err)
+    }
+  };
+  handlePeriodChange()
+  }, [selectedPredictPeriod])  
+
+  // console.log(selectedCoin)
+  // console.log(selectedPredictPeriod)
+  console.log(data)
   
   return (
     <div>
@@ -33,7 +61,7 @@ const Predict = () => {
           <div className="dropdownWrapper">
             <div className="choiceCoin">
               <p>코인 선택:</p>
-              <Dropdown options = {option1} />     
+              <Dropdown options = {option1} setSelectedCoinSymbol = {setSelectedCoinSymbol} coinSymbol = {coinSymbol}/>     
             </div>
             <div className="choicePeriod">
               <p>기간 선택:</p>          
@@ -46,7 +74,10 @@ const Predict = () => {
               {periodSelected == "미래" &&(
                 <>
                   {/* <p>기간을 선택하세요:</p>*/}
-                  <Dropdown options = {option2["미래"]}/>        
+                  <Dropdown 
+                    options = {option2["미래"]}
+                    setSelectedPredictPeriod = {setSelectedPredictPeriod}
+                  />        
                 </>
               )}
             </div>
