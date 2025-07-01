@@ -6,9 +6,9 @@ import axios from 'axios'
 
 
 const Predict = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const [periodSelected, setPeriodSelected] = useState("과거")
-  const option1 = coins.map((coin => (coin.name)))
-  const coinSymbol = coins.map((coin => (coin.pair)))
+  const option1 = coins.map((coin => ({pair: coin.pair, name:coin.name})))  
   const option2 = {
     "과거":["1년 전", "2년 전", "3년 전"],
     "미래":["7일 후", "15일 후", "30일 후"],
@@ -34,11 +34,11 @@ const Predict = () => {
     }
   };
   handlePeriodChange()
-  }, [selectedPredictPeriod])  
+  }, [selectedCoinSymbol,selectedPredictPeriod])  
 
   // console.log(selectedCoin)
   // console.log(selectedPredictPeriod)
-  console.log(data)
+  console.log("data", data)
   
   return (
     <div>
@@ -61,7 +61,7 @@ const Predict = () => {
           <div className="dropdownWrapper">
             <div className="choiceCoin">
               <p>코인 선택:</p>
-              <Dropdown options = {option1} setSelectedCoinSymbol = {setSelectedCoinSymbol} coinSymbol = {coinSymbol}/>     
+              <Dropdown options = {option1} setSelectedCoinSymbol = {setSelectedCoinSymbol} optionKey = "name" optionValue = "pair" isObject = {true}/>     
             </div>
             <div className="choicePeriod">
               <p>기간 선택:</p>          
@@ -69,6 +69,7 @@ const Predict = () => {
                 <Dropdown 
                   options = {option2["과거"]}
                   className = "pastDropdown"
+                  isObject = {false}
                 />        
               )}
               {periodSelected == "미래" &&(
@@ -76,6 +77,7 @@ const Predict = () => {
                   {/* <p>기간을 선택하세요:</p>*/}
                   <Dropdown 
                     options = {option2["미래"]}
+                    isObject = {false}
                     setSelectedPredictPeriod = {setSelectedPredictPeriod}
                   />        
                 </>
@@ -85,42 +87,55 @@ const Predict = () => {
               <p>가격:</p>
               <input type="text" />
             </div>
+            <button
+              onClick={() => setIsOpen(true)}
+            >제출</button>
           </div>          
         </div>
       </div>
       <div className="container" id='predictContainer'>
-        <div className="predictResultContainer">
-          <h2 className="predictResultTitle">
-            투자 예측 결과
-          </h2>
-          <p className='predictResultText'>예상 결과</p>
-          <div className="predictGrid">
-            <div className="gridBox">
-              <p className="gridBoxTitle">초기 투자금</p>
-              <p className='girdBoxContent'>$1000</p>
-            </div>
-            <div className="gridBox">
-              <p className="gridBoxTitle">예상 자산 가치</p>
-              <p className='girdBoxContent'>$1000</p>
-            </div>
-            <div className="gridBox">
-              <p className="gridBoxTitle">예상 수익/손실</p>
-              <p className='girdBoxContent'>$1000</p>
-            </div>
-            <div className="gridBox">
-              <p className="gridBoxTitle">예상 수익률</p>
-              <p className='girdBoxContent'>$1000</p>
-            </div>
-            <div className="gridBox">
-              <p className="gridBoxTitle">ETH 시작 시점 가격</p>
-              <p className='girdBoxContent'>$1000</p>
-            </div>
-            <div className="gridBox">
-              <p className="gridBoxTitle">ETH 30일 후 예상 가격</p>
-              <p className='girdBoxContent'>$1000</p>
+        {!isOpen && (
+          <div className="predictFirstPage">
+            <h2>코인 종류와 기간을 선택하세요.</h2>
+          </div>
+        )}
+        {isOpen && (
+          <div className="predictResultContainer">
+            <h2 className="predictResultTitle">
+              투자 예측 결과
+            </h2>
+            <p className='predictResultText'>예상 결과</p>
+            <div className="predictGrid">
+              <div className="gridBox">
+                <p className="gridBoxTitle">초기 투자금</p>
+                <p className='girdBoxContent'>$1000</p>
+              </div>
+              <div className="gridBox">
+                <p className="gridBoxTitle">예상 자산 가치</p>
+                <p className='girdBoxContent'>$1000</p>
+              </div>
+              <div className="gridBox">
+                <p className="gridBoxTitle">예상 수익/손실</p>
+                <p className='girdBoxContent'>$1000</p>
+              </div>
+              <div className="gridBox">
+                <p className="gridBoxTitle">예상 수익률</p>
+                {data.map((data, idx) => (
+                  <p className='girdBoxContent'>{data["predict_return_7d"]}</p>
+                )) }
+              </div>
+              <div className="gridBox">
+                <p className="gridBoxTitle">ETH 시작 시점 가격</p>
+                <p className='girdBoxContent'>$1000</p>
+              </div>
+              <div className="gridBox">
+                <p className="gridBoxTitle">ETH 30일 후 예상 가격</p>
+                <p className='girdBoxContent'>$1000</p>
+              </div>
             </div>
           </div>
-        </div>
+
+        )}
       </div>
     </div>
   )

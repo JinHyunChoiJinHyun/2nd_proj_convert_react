@@ -100,7 +100,6 @@ def get_change_week_rate():
     
 # 예측률 api
 
-# 7일
 @app.route("/api/predicts", methods = ["GET"])
 def get_prediction():
     keyword = request.args.get("q", "")
@@ -114,7 +113,7 @@ def get_prediction():
             cursorclass=pymysql.cursors.DictCursor
         )
         with conn.cursor() as cursor:
-            sql = "SELECT predict_return_7d FROM coin_prediction WHERE pair = %s"
+            sql = "SELECT predict_return_7d, predict_return_15d, predict_return_30d FROM coin_prediction WHERE pair = %s"
             cursor.execute(sql, (keyword,))
             result = cursor.fetchall()
             return jsonify(result)
